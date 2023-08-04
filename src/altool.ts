@@ -23,7 +23,7 @@ export async function uploadApp(
     'altool',
     '--output-format',
     'xml',
-    '--upload-app',
+    '--upload-package',
     '--file',
     appPath,
     '--type',
