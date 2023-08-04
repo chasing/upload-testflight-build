@@ -13,6 +13,10 @@ async function run(): Promise<void> {
     const issuerId: string = core.getInput('issuer-id')
     const apiKeyId: string = core.getInput('api-key-id')
     const apiPrivateKey: string = core.getInput('api-private-key')
+    const appleId: string = core.getInput('appleId')
+    const bundleId: string = core.getInput('bundleId')
+    const bundleVersion: string = core.getInput('bundleVersion')
+    const bundleVersionString: string = core.getInput('bundleVersionString')
     const appPath: string = core.getInput('app-path')
     const appType: string = core.getInput('app-type')
 
@@ -25,7 +29,17 @@ async function run(): Promise<void> {
     }
 
     await altool.installPrivateKey(apiKeyId, apiPrivateKey)
-    await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
+    await altool.uploadApp(
+      appPath,
+      appType,
+      apiKeyId,
+      issuerId,
+      appleId,
+      bundleId,
+      bundleVersion,
+      bundleVersionString,
+      options
+    )
     await altool.deleteAllPrivateKeys()
 
     core.setOutput('altool-response', output)

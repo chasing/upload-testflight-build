@@ -10,6 +10,10 @@ import {ExecOptions} from '@actions/exec/lib/interfaces'
  @param appType The type of app to upload (osx | ios | appletvos)
  @param apiKeyId The id of the API key to use (private key must already be installed)
  @param issuerId The issuer identifier of the API key.
+ @param appleId X
+ @param bundleId X
+ @param bundleVersion X
+ @param bundleVersionString X
  @param options (Optional) Command execution options.
  */
 export async function uploadApp(
@@ -17,6 +21,10 @@ export async function uploadApp(
   appType: string,
   apiKeyId: string,
   issuerId: string,
+  appleId: string,
+  bundleId: string,
+  bundleVersion: string,
+  bundleVersionString: string,
   options?: ExecOptions
 ): Promise<void> {
   const args: string[] = [
@@ -31,7 +39,15 @@ export async function uploadApp(
     '--apiKey',
     apiKeyId,
     '--apiIssuer',
-    issuerId
+    issuerId,
+    '--apple-id',
+    appleId,
+    '--bundle-id',
+    bundleId,
+    '--bundle-version',
+    bundleVersion,
+    '--bundle-short-version-string',
+    bundleVersionString
   ]
 
   await exec.exec('xcrun', args, options)

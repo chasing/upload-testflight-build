@@ -1911,7 +1911,7 @@ const exec = __importStar(__webpack_require__(986));
  @param issuerId The issuer identifier of the API key.
  @param options (Optional) Command execution options.
  */
-function uploadApp(appPath, appType, apiKeyId, issuerId, options) {
+function uploadApp(appPath, appType, apiKeyId, issuerId, appleId, bundleId, bundleVersion, bundleVersionString, options) {
     return __awaiter(this, void 0, void 0, function* () {
         const args = [
             'altool',
@@ -1925,7 +1925,15 @@ function uploadApp(appPath, appType, apiKeyId, issuerId, options) {
             '--apiKey',
             apiKeyId,
             '--apiIssuer',
-            issuerId
+            issuerId,
+            '--apple-id',
+            appleId,
+            '--bundle-id',
+            bundleId,
+            '--bundle-version',
+            bundleVersion,
+            '--bundle-short-version-string',
+            bundleVersionString
         ];
         yield exec.exec('xcrun', args, options);
     });
@@ -3628,6 +3636,10 @@ function run() {
             const issuerId = core.getInput('issuer-id');
             const apiKeyId = core.getInput('api-key-id');
             const apiPrivateKey = core.getInput('api-private-key');
+            const appleId = core.getInput('appleId');
+            const bundleId = core.getInput('bundleId');
+            const bundleVersion = core.getInput('bundleVersion');
+            const bundleVersionString = core.getInput('bundleVersionString');
             const appPath = core.getInput('app-path');
             const appType = core.getInput('app-type');
             const waitForProcessing = core.getInput('wait-for-build-processing');
@@ -3639,7 +3651,7 @@ function run() {
                 }
             };
             yield altool.installPrivateKey(apiKeyId, apiPrivateKey);
-            yield altool.uploadApp(appPath, appType, apiKeyId, issuerId, options);
+            yield altool.uploadApp(appPath, appType, apiKeyId, issuerId, appleId, bundleId, bundleVersion, bundleVersionString, options);
             yield altool.deleteAllPrivateKeys();
             if (waitForProcessing === 'true') {
                 // TODO: poll app-store connect for build
