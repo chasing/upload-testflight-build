@@ -1918,7 +1918,6 @@ function uploadApp(appPath, appType, apiKeyId, issuerId, appleId, bundleId, bund
             '--output-format',
             'xml',
             '--upload-package',
-            '--file',
             appPath,
             '--type',
             appType,
