@@ -1917,7 +1917,7 @@ function uploadApp(appPath, appType, apiKeyId, issuerId, options) {
             'altool',
             '--output-format',
             'xml',
-            '--upload-app',
+            '--upload-package',
             '--file',
             appPath,
             '--type',
